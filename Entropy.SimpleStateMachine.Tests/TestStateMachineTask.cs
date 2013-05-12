@@ -39,4 +39,25 @@ namespace Entropy.SimpleStateMachine.Tests
             return DateTime.Now;
         }
     }
+
+    [TaskDescriptor(TaskName = "CreateAFEActivity")]
+    public class CreateAFEActivityTask : StateMachineTask
+    {
+       
+
+        public static void Clear()
+        {
+            
+        }
+
+        protected override object PerformStateMachineTask(StateMachineActionContext context)
+        {
+            Guid afeworkflowid = context.WorkflowContext.Id;
+            //string targetstate = context.CurrentTransition.TargetState.ToString();
+            string activitytype = context.Action.ActionName;
+            return DateTime.Now;
+        }
+
+        
+    }
 }

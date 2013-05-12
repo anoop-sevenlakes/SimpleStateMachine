@@ -153,20 +153,39 @@
 			add_state(name, null, null);
 		}
 
-		protected void add_transition(string eventName, string targetStateName)
-		{
-			if (CurrentState != null)
-			{
-				var transition = new TransitionDef
-				                 	{
-				                 		ParentState = CurrentState,
-				                 		TriggerEvent = eventName,
-				                 		TargetState = targetStateName
-				                 	};
-				PendingTransitions.Add(transition);
-			    CurrentEvent = StateMachine.FindEventByName(eventName);
-			}
-		}
+        protected void add_transition(string eventName, string targetStateName)
+        {
+            if (CurrentState != null)
+            {
+                var transition = new TransitionDef
+                {
+                    ParentState = CurrentState,
+                    TriggerEvent = eventName,
+                    TargetState = targetStateName,
+                    RolesRequired = new List<string>()
+                };
+
+                PendingTransitions.Add(transition);
+                CurrentEvent = StateMachine.FindEventByName(eventName);
+            }
+        }
+        protected void add_transition(string eventName, string targetStateName, string rolesRequired)
+        {
+            if (CurrentState != null)
+            {
+                var transition = new TransitionDef
+                {
+                    ParentState = CurrentState,
+                    TriggerEvent = eventName,
+                    TargetState = targetStateName,
+                    RolesRequired = new List<string>()
+                };
+                foreach (string role in rolesRequired.ToString().Replace("(", "").Replace(")", "").Split(new char[] { ',' }))
+                    transition.RolesRequired.Add(role);
+                PendingTransitions.Add(transition);
+                CurrentEvent = StateMachine.FindEventByName(eventName);
+            }
+        }
 
 		protected void on_enter_state(string taskName, params object[] args)
 		{
@@ -317,9 +336,21 @@
 			var original = (BinaryExpression) expression;
 
 			var method = new ReferenceExpression("add_transition");
-
-			var invoker = new MethodInvocationExpression(method, original.Left, original.Right);
-			return invoker;
+            if (original.Left is BinaryExpression)
+            {
+                var left = (BinaryExpression) original.Left;
+                //ArrayLiteralExpression rolesRequiredArray = (ArrayLiteralExpression)left.Right;
+                //List<string> rolesRequired = new List<string>();
+                //foreach (Expression exp in rolesRequiredArray.Items)
+                //    rolesRequired.Add(exp.ToString());
+                var invoker = new MethodInvocationExpression(method, left.Left, original.Right, left.Right);
+                return invoker;
+            }
+            else
+            {
+                var invoker = new MethodInvocationExpression(method, original.Left, original.Right);
+                return invoker;
+            }
 		}
 
 		protected void AddAction(string taskName, object[] args, StateTransitionPhase phase)
@@ -382,6 +413,7 @@
 			public IStateMachineStateBuilder ParentState;
 			public string TargetState;
 			public string TriggerEvent;
+            public List<string> RolesRequired;
 		}
 
 		#endregion

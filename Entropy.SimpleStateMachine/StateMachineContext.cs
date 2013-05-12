@@ -69,6 +69,8 @@ namespace Entropy.SimpleStateMachine
 
     	public Guid Id { get; set; }
 
+        public string UserRole { get; set; }
+
     	public bool IsStarted
         {
             get { return CurrentState != null; }
