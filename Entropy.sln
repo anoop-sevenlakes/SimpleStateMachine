@@ -1,9 +1,5 @@
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entropy.SimpleStateMachine", "Entropy.SimpleStateMachine\Entropy.SimpleStateMachine.csproj", "{E147B164-663C-49D3-8166-1E3A829B22B3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entropy.SimpleStateMachine.Tests", "Entropy.SimpleStateMachine.Tests\Entropy.SimpleStateMachine.Tests.csproj", "{33C0A62A-A425-4E5C-9D57-198C3BFC2EBB}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{38F53558-5123-442A-9D5B-5C8A6DBCC996}"
 	ProjectSection(SolutionItems) = preProject
 		lib\Boo.Lang.Compiler.dll = lib\Boo.Lang.Compiler.dll
@@ -14,6 +10,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{38F53558-512
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{2E8BB30B-4494-442E-8095-EF28504C16DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entropy.SimpleStateMachine", "Entropy.SimpleStateMachine\Entropy.SimpleStateMachine.csproj", "{E147B164-663C-49D3-8166-1E3A829B22B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entropy.SimpleStateMachine.Tests", "Entropy.SimpleStateMachine.Tests\Entropy.SimpleStateMachine.Tests.csproj", "{33C0A62A-A425-4E5C-9D57-198C3BFC2EBB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StateMachineDemo", "StateMachineDemo\StateMachineDemo.csproj", "{8FDFC314-E82E-4142-8D8C-19F790A3739F}"
 EndProject
