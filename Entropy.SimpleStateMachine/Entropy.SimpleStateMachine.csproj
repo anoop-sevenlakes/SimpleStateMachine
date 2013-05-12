@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E147B164-663C-49D3-8166-1E3A829B22B3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Entropy.SimpleStateMachine</RootNamespace>
+    <AssemblyName>Entropy.SimpleStateMachine</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Boo.Lang, Version=2.0.0.0, Culture=neutral, PublicKeyToken=32c39770e9a21a67, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Boo.Lang.dll</HintPath>
+    </Reference>
+    <Reference Include="Boo.Lang.Compiler, Version=2.0.0.0, Culture=neutral, PublicKeyToken=32c39770e9a21a67, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Boo.Lang.Compiler.dll</HintPath>
+    </Reference>
+    <Reference Include="Boo.Lang.Parser, Version=2.0.0.0, Culture=neutral, PublicKeyToken=32c39770e9a21a67, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Boo.Lang.Parser.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.DSL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Rhino.DSL.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\StateMachineBuilder.cs" />
+    <Compile Include="Configuration\StateMachineDSLEngine.cs" />
+    <Compile Include="ErrorEventArgs.cs" />
+    <Compile Include="Interfaces\IDomainStateContext.cs" />
+    <Compile Include="Interfaces\IObjectBuilder.cs" />
+    <Compile Include="Interfaces\IStateEventActionManager.cs" />
+    <Compile Include="Interfaces\IStateMachine.cs" />
+    <Compile Include="Interfaces\IStateMachineAction.cs" />
+    <Compile Include="Interfaces\IStateMachineBuilder.cs" />
+    <Compile Include="Interfaces\IStateMachineComponent.cs" />
+    <Compile Include="Interfaces\IStateMachineContext.cs" />
+    <Compile Include="Interfaces\IStateMachineEvent.cs" />
+    <Compile Include="Interfaces\IStateMachineEventAction.cs" />
+    <Compile Include="Interfaces\IStateMachineState.cs" />
+    <Compile Include="Interfaces\IStateTransition.cs" />
+    <Compile Include="Interfaces\IStateTransitionAction.cs" />
+    <Compile Include="Interfaces\IStateTransitionActionManager.cs" />
+    <Compile Include="Interfaces\IDomainContextRepository.cs" />
+    <Compile Include="Interfaces\IStateMachineService.cs" />
+    <Compile Include="Interfaces\IStateMachineContextPersistenceService.cs" />
+    <Compile Include="Interfaces\IWorkflowEntity.cs" />
+    <Compile Include="Interfaces\IWorkflowPersister.cs" />
+    <Compile Include="Interfaces\IWorkflowService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReflectiveDomainContextWrapper.cs" />
+    <Compile Include="DefaultObjectBuilder.cs" />
+    <Compile Include="Services\Persistence\FilePersister.cs" />
+    <Compile Include="Services\Persistence\WorkflowEntity.cs" />
+    <Compile Include="Services\StateMachineService.cs" />
+    <Compile Include="Services\WorkflowService.cs" />
+    <Compile Include="StateChangedEventArgs.cs" />
+    <Compile Include="StateChangingEventArgs.cs" />
+    <Compile Include="StateMachine.cs" />
+    <Compile Include="StateMachineAction.cs" />
+    <Compile Include="StateMachineActionContext.cs" />
+    <Compile Include="StateMachineComponent.cs" />
+    <Compile Include="StateMachineContext.cs" />
+    <Compile Include="StateMachineEvent.cs" />
+    <Compile Include="StateMachineEventAction.cs" />
+    <Compile Include="StateMachineEventArgs.cs" />
+    <Compile Include="StateMachineExtensions.cs" />
+    <Compile Include="StateMachineState.cs" />
+    <Compile Include="StateMachineTask.cs" />
+    <Compile Include="StateTransition.cs" />
+    <Compile Include="StateTransitionAction.cs" />
+    <Compile Include="StateTransitionEventArgs.cs" />
+    <Compile Include="StateTransitionPhase.cs" />
+    <Compile Include="TaskManagement\CustomExecMethodTaskWrapper.cs" />
+    <Compile Include="TaskManagement\ITask.cs" />
+    <Compile Include="TaskManagement\ITaskContext.cs" />
+    <Compile Include="TaskManagement\ITaskExecutionService.cs" />
+    <Compile Include="TaskManagement\ITaskProvider.cs" />
+    <Compile Include="TaskManagement\TaskContext.cs" />
+    <Compile Include="TaskManagement\TaskDescription.cs" />
+    <Compile Include="TaskManagement\TaskDescriptorAttribute.cs" />
+    <Compile Include="TaskManagement\TaskEventArgs.cs" />
+    <Compile Include="TaskManagement\TaskExecutionService.cs" />
+    <Compile Include="TaskManagement\TaskExtensionMethods.cs" />
+    <Compile Include="TaskManagement\TaskFactory.cs" />
+    <Compile Include="TaskManagement\Tasks\InvokeContextMethodTask.cs" />
+    <Compile Include="TaskManagement\Tasks\RetriableTask.cs" />
+    <Compile Include="TaskManagement\Tasks\RetriableTaskContainer.cs" />
+    <Compile Include="TaskManagement\Tasks\TaskBase.cs" />
+    <Compile Include="UtilityExtensionMethods.cs" />
+    <Compile Include="Utility\GuidCombGenerator.cs" />
+    <Compile Include="Utility\ServiceLocator.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
