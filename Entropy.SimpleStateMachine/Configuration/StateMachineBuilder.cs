@@ -85,7 +85,7 @@
 						"A non-existent target state was specified in a transition for " +
 						transition.ParentState.StateName + " : " + transition.TargetState);
 
-				transition.ParentState.AddNewTransition(triggerEvent, targetState);
+				((StateMachineState)transition.ParentState ).AddNewTransition(triggerEvent, targetState, transition.RolesRequired);
 			}
 		}
 

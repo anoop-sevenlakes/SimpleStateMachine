@@ -1,33 +1,32 @@
-﻿workflow "AFE Approval"
+﻿workflow "AFEApproval"  
+trigger @SUBMIT 
+trigger @ACCEPT 
+trigger @LASTACCEPT 
+trigger @REJECT 
+trigger @PUBLISH 
+  
+state @DRFT: 
+ when @SUBMIT > @PAPRVL 
+   on_event @CreateTask 
 
-trigger @Submit
-trigger @Accept
-trigger @Reject
-trigger @Approve
-trigger @Publish
+state @PAPRVL: 
+ when @ACCEPT > @PAPRVL 
+   on_event @CreateTask 
+ when @LASTACCEPT > @PAAPRVL 
+   on_event @CreateTask 
+ when @REJECT > @DRFT 
+   on_event @CreateTask 
 
-state @New:
-	when @Submit      > @PendingReview
-		on_event @AfeSubmitTask
-	
-state @PendingReview:
-	when @Accept		> @PendingReview
-		on_event @AfeAcceptTask
-	when @LastAccept		> @PendingApproval 
-		on_event @AfeAcceptTask
-	when @Reject        > @New
-		on_event @AfeRejectTask
-	
-state @PendingApproval:
-	when @Accept     > @PendingApproval
-		on_event @AfeAcceptTask
-	when @LastAccept     > @Approved
-		on_event @AfeAcceptTask
-	when @Reject         > @New
-		on_event @AfeRejectTask
+state @PAAPRVL: 
+ when @ACCEPT > @PAAPRVL 
+   on_event @CreateTask 
+ when @LASTACCEPT > @APRVD 
+   on_event @CreateTask 
+ when @REJECT > @DRFT 
+   on_event @CreateTask 
 
-state @Approved:
-	when @Publish       > @Published
-		on_event @AfePublishTask
-
-state @Published
+state @APRVD: 
+ when @PUBLISH > @PBLSD 
+   on_event @CreateTask 
+  
+state @PBLSD

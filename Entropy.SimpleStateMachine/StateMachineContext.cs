@@ -115,6 +115,8 @@ namespace Entropy.SimpleStateMachine
             }
 
             IStateTransition transition = this.FindFirstMatchingTransition(evt);
+            this.FindMatchingTransitions();
+
             if (transition == null) return EventResponse.EventNotInScope;
 
             if (IsTransactional)

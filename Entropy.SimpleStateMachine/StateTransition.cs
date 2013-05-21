@@ -1,9 +1,23 @@
-﻿using Entropy.SimpleStateMachine.Interfaces;
+﻿using Entropy.SimpleStateMachine.Configuration;
+using Entropy.SimpleStateMachine.Interfaces;
+using System.Collections.Generic;
 
 namespace Entropy.SimpleStateMachine
 {
     public class StateTransition : StateMachineComponent, IStateTransition
     {
+        public List<string> RolesRequired { get; set; }
+
+        public StateTransition(IStateMachineState parent, IStateMachineEvent triggerEvent,
+                               IStateMachineState targetState, List<string> rolesRequired)
+            : base(parent.StateMachine)
+        {
+            ParentState = parent;
+            TriggerEvent = triggerEvent;
+            TargetState = targetState;
+            RolesRequired = rolesRequired;
+        }
+
         public StateTransition(IStateMachineState parent, IStateMachineEvent triggerEvent,
                                IStateMachineState targetState) : base(parent.StateMachine)
         {
@@ -22,7 +36,33 @@ namespace Entropy.SimpleStateMachine
         public virtual bool Matches(object eventId, IStateMachineContext context)
         {
             if (TriggerEvent != null)
-                return TriggerEvent.Matches(eventId);
+                if (TriggerEvent.Matches(eventId) || (eventId is string &&  (  eventId.ToString().Equals( "NA" ))))
+                 {
+                    if (this.RolesRequired != null && this.RolesRequired.Count > 0)
+                    {
+
+                        foreach (string role in this.RolesRequired)
+                        {
+                            AFEContext afe = new AFEContext();
+                            afe.Assignments = new List<AFEAssignment>();
+                            afe.UserID = 1;
+                            afe.Assignments.Add(new AFEAssignment() { AfeRoleCode = "AAPR", Order = 1, UserID = 1 });
+                            afe.Assignments.Add(new AFEAssignment() { AfeRoleCode = "AAPR", Order = 2, UserID = 2 });
+                            
+
+                            bool IsLastUserInTheCurrentOrder = afe.IsLastUserInTheCurrentOrder(role);
+
+                            bool IsLastPersonInTheCurrentRole = afe.IsLastPersonInTheCurrentRole(role);
+
+                            if (afe.Assignments.FindAll(t => t.AfeRoleCode == role && t.UserID == afe.UserID).Count > 0)
+                                return true;
+                            else
+                                return false;
+                        }
+                    }
+                    else
+                        return true;
+                }
             return false;
         }
 

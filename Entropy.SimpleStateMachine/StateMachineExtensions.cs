@@ -91,6 +91,27 @@ namespace Entropy.SimpleStateMachine
         }
 
 
+        public static List<IStateTransition>  FindMatchingTransitions(this IStateMachineContext context)
+        {
+            if (context == null || context.CurrentState == null)
+                throw new ArgumentNullException("context");
+            
+            if (context.CurrentState.Transitions == null)
+                return null;
+
+            List<IStateTransition> transitions = new List<IStateTransition>();
+            foreach (IStateTransition transition in context.CurrentState.Transitions)
+            {
+                if (transition.Matches("NA", context))
+                    transitions.Add(transition);
+            }
+            if (transitions.Count > 0)
+                return transitions;
+            else
+                return null; 
+            
+        }
+
         public static IStateTransition FindFirstMatchingTransition(this IStateMachineContext context,
                                                                    IStateMachineEvent transitionEvent)
         {

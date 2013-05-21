@@ -67,6 +67,13 @@ namespace Entropy.SimpleStateMachine
             return StateIdentifier.Equals(stateIdentifier);
         }
 
+        public virtual IStateTransition AddNewTransition(IStateMachineEvent trigger, IStateMachineState destination, List<string> rolesRequired)
+        {
+            var transition = new StateTransition(this, trigger, destination, rolesRequired);
+            TransitionList.Add(transition);
+            return transition;
+        }
+
         public virtual IStateTransition AddNewTransition(IStateMachineEvent trigger, IStateMachineState destination)
         {
             var transition = new StateTransition(this, trigger, destination);

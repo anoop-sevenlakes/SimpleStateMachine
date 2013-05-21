@@ -70,6 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\AFEContext.cs" />
     <Compile Include="Configuration\StateMachineBuilder.cs" />
     <Compile Include="Configuration\StateMachineDSLEngine.cs" />
     <Compile Include="ErrorEventArgs.cs" />
